@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order | Friends Fast Food</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="order-body">
+    <main class="order-page">
+        <header class="order-header">
+            <a class="order-logo" href="index.html">FRIENDS FAST FOOD 🍔</a>
+            <a class="continue-link" href="index.html#menu">Continue shopping</a>
+        </header>
+
+        <section class="order-content" aria-labelledby="orderTitle">
+            <p class="order-eyebrow">YOUR SELECTION</p>
+            <h1 id="orderTitle">Your Order</h1>
+
+            <div class="order-panel">
+                <div id="orderItems" class="order-items" aria-live="polite"></div>
+
+                <div class="order-total-row">
+                    <span>Total</span>
+                    <strong id="orderTotal">₹0</strong>
+                </div>
+
+                <p id="orderMessage" class="order-message" role="status" aria-live="polite"></p>
+
+                <div class="order-actions">
+                    <a class="order-back-button" href="index.html#menu">Add more items</a>
+                    <button type="button" class="place-order-button" id="placeOrderButton">Place Order</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const cartStorageKey = "friendsFastFoodCart";
+        const orderItems = document.getElementById("orderItems");
+        const orderTotal = document.getElementById("orderTotal");
+        const orderMessage = document.getElementById("orderMessage");
+        const placeOrderButton = document.getElementById("placeOrderButton");
+
+        function readCart() {
+            return JSON.parse(localStorage.getItem(cartStorageKey) || "[]");
+        }
+
+        function formatPrice(price) {
+            return `₹${Number(price).toLocaleString("en-IN")}`;
+        }
+
+        function makeButton(label, action, index, className, accessibleLabel) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = className;
+            button.textContent = label;
+            button.dataset.action = action;
+            button.dataset.index = index;
+            button.setAttribute("aria-label", accessibleLabel);
+            return button;
+        }
+
+        function renderCart() {
+            const cart = readCart();
+            let total = 0;
+            orderItems.replaceChildren();
+
+            if (cart.length === 0) {
+                const emptyMessage = document.createElement("p");
+                emptyMessage.className = "order-empty";
+                emptyMessage.textContent = "Your order is empty. Browse the menu to add something delicious.";
+                orderItems.append(emptyMessage);
+            }
+
+            cart.forEach(function(item, index) {
+                total += Number(item.price) * item.quantity;
+
+                const row = document.createElement("article");
+                row.className = "order-item";
+
+                const details = document.createElement("div");
+                details.className = "order-item-details";
+
+                const name = document.createElement("h2");
+                name.textContent = item.name;
+
+                const price = document.createElement("p");
+                price.textContent = `${formatPrice(item.price)} each`;
+
+                const subtotal = document.createElement("p");
+                subtotal.className = "order-item-total";
+                subtotal.textContent = `Subtotal: ${formatPrice(Number(item.price) * Number(item.quantity))}`;
+                details.append(name, price, subtotal);
+
+                const controls = document.createElement("div");
+                controls.className = "order-item-controls";
+
+                const quantityControl = document.createElement("div");
+                quantityControl.className = "quantity-control";
+                quantityControl.append(
+                    makeButton("−", "decrease", index, "quantity-button", `Decrease ${item.name} quantity`)
+                );
+
+                const quantity = document.createElement("span");
+                quantity.className = "quantity-value";
+                quantity.textContent = item.quantity;
+                quantityControl.append(quantity);
+                quantityControl.append(
+                    makeButton("+", "increase", index, "quantity-button", `Increase ${item.name} quantity`)
+                );
+
+                controls.append(quantityControl);
+                controls.append(
+                    makeButton("Remove", "remove", index, "remove-button", `Remove ${item.name}`)
+                );
+
+                row.append(details, controls);
+                orderItems.append(row);
+            });
+
+            orderTotal.textContent = formatPrice(total);
+            placeOrderButton.disabled = cart.length === 0;
+        }
+
+        orderItems.addEventListener("click", function(event) {
+            const button = event.target.closest("button[data-action]");
+            if (!button) {
+                return;
+            }
+
+            const cart = readCart();
+            const itemIndex = Number(button.dataset.index);
+            const item = cart[itemIndex];
+            if (!item) {
+                return;
+            }
+
+            if (button.dataset.action === "increase") {
+                item.quantity += 1;
+            } else if (button.dataset.action === "decrease") {
+                item.quantity -= 1;
+                if (item.quantity <= 0) {
+                    cart.splice(itemIndex, 1);
+                }
+            } else if (button.dataset.action === "remove") {
+                cart.splice(itemIndex, 1);
+            }
+
+            localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+            renderCart();
+        });
+
+        placeOrderButton.addEventListener("click", function() {
+            if (readCart().length === 0) {
+                return;
+            }
+
+            localStorage.removeItem(cartStorageKey);
+            renderCart();
+            orderMessage.textContent = "Your order has been placed. Thank you!";
+        });
+
+        renderCart();
+    </script>
+</body>
+</html>

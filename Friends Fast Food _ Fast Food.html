@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#contact -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends Fast Food | Fast Food</title>
+    <link rel="stylesheet" href="./Friends Fast Food _ Fast Food_files/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif, serif;
+        }
+
+        body {
+            background: #111;
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: #0b0b0b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff5a00;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff5a00;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(
+                rgba(0,0,0,0.7),
+                rgba(0,0,0,0.7)
+            ),
+            url("https://images.unsplash.com/photo-1568901346375-23c9450c58cd")
+            center/cover;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            color: #ffef0f;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            color: #eee;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff5a00;
+            color: rgba(17, 31, 230, 0);
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff7b2f;
+        }
+
+        /* Common Section Styling */
+        .section {
+            padding: 60px 8%;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            margin-bottom: 25px;
+            color: #ff5a00;
+        }
+
+        .section p {
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        /* Menu Grid & Cards */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .menu-card {
+            background: #1c1c1c;
+            border-radius: 15px;
+            overflow: hidden;
+            padding-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(255, 90, 0, 0.2);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .menu-card h3 {
+            margin: 15px 0 8px;
+            font-size: 22px;
+            color: #fff;
+        }
+
+        .menu-card .price {
+            color: #ff5a00;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .order-btn {
+            display: inline-block;
+            background: #ff5a00;
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .order-btn:hover {
+            background: #ff7b2f;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #080808;
+            color: #777;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            nav a {
+                margin: 0 10px;
+            }
+        }
+
+    
+    .order-btn:hover {
+        background: #ff7b2f;
+    }
+
+    .loading-screen {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: #111;
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .burger-loader {
+        font-size: 70px;
+        animation: burgerSpin 1s infinite;
+    }
+
+    .loading-text {
+        margin-top: 20px;
+        color: #ff5a00;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    @keyframes burgerSpin {
+        0% {
+            transform: scale(1) rotate(0deg);
+        }
+
+        50% {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">FRIENDS FAST FOOD 🍔</div>
+        <div>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#">Home</a>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#menu">Menu</a>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#about">About</a>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <h1>FRIENDS FAST </h1>
+            <p>Fresh • Crispy • Delicious</p>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#menu" class="btn">EXPLORE MENU</a>
+            <button type="button" id="myButton" class="click-button">Click Me</button>
+        </div>
+    </section>
+
+    <!-- Menu Cards Section -->
+    <section class="section" id="menu">
+        <h2>Our Menu 🍔</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="./Friends Fast Food _ Fast Food_files/photo-1568901346375-23c9450c58cd" alt="Classic Burger">
+                <h3>Classic Burger</h3>
+                <div class="price">₹99</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
+
+            <div class="menu-card">
+                <img src="./Friends Fast Food _ Fast Food_files/photo-1574071318508-1cdbab80d002" alt="Cheese Pizza">
+                <h3>Cheese Pizza</h3>
+                <div class="price">₹149</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
+
+            <div class="menu-card">
+                <img src="./Friends Fast Food _ Fast Food_files/photo-1573080496219-bb080dd4f877" alt="French Fries">
+                <h3>French Fries</h3>
+                <div class="price">₹59</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
+
+            <div class="menu-card">
+                <img src="./Friends Fast Food _ Fast Food_files/photo-1626082927389-6cd097cdc6ec" alt="Fried Chicken">
+                <h3>Fried Chicken</h3>
+                <div class="price">₹129</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2>About Us</h2>
+        <p>
+            Welcome to Crispy Bite! We serve delicious, fresh, and crispy fast food made with quality ingredients. Perfect taste, affordable prices, and a happy food experience.
+        </p>
+    </section>
+
+    <!-- Contact Section -->
+ <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p style="margin-bottom: 25px; color: #bbb;">
+        </p><div style="line-height: 2; color: #ccc; font-size: 16px;">
+            📍 <strong>Location:</strong> 37, Adithanar Rd, Pudupet, Egmore,Chennai, Tamil Nadu-600002<br>
+            📞 <strong>Phone:</strong> +91 9677028230<br>
+            ✉️ <strong>Email:</strong> hypersaravanan12@crispybite.com<br>
+            🕒 <strong>Timing:</strong> Open – Closed: 11:00 AM – 11:30 PM
+        </div>
+        <div style="margin-top: 30px;">
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#" class="order-btn" style="margin: 5px;">Instagram</a>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#" class="order-btn" style="margin: 5px;">WhatsApp</a>
+            <a href="file:///C:/Users/SARAVANAN%20HYPER/OneDrive/Desktop/fast%20food%20shop/index.html#" class="order-btn" style="margin: 5px;">Facebook</a>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById("myButton").addEventListener("click", function() {
+            alert("Button clicked!");
+        });
+
+        document.querySelectorAll(".menu-card .order-btn").forEach(function(button) {
+            button.addEventListener("click", function() {
+                const menuCard = button.closest(".menu-card");
+                const itemName = menuCard.querySelector("h3").textContent.trim();
+                const itemPrice = menuCard.querySelector(".price").textContent.trim();
+                const message = `Hi, I'd like to order ${itemName} (${itemPrice}).`;
+                const whatsappUrl = `https://wa.me/919677028230?text=${encodeURIComponent(message)}`;
+
+                window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+            });
+        });
+    </script>
+
+
+</body></html>

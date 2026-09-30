@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Crispy Bite | Fast Food</title>
-
+    <title>Friends Fast Food | Fast Food</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif, serif;
         }
 
         body {
@@ -26,6 +25,9 @@
             align-items: center;
             padding: 20px 8%;
             background: #0b0b0b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -38,6 +40,8 @@
             color: white;
             text-decoration: none;
             margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
 
         nav a:hover {
@@ -46,7 +50,7 @@
 
         /* Hero */
         .hero {
-            min-height: 85vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -61,238 +65,471 @@
         }
 
         .hero h1 {
-            font-size: 60px;
-            color: #ff5a00;
+            font-size: 56px;
+            color: #ffef0f;
             margin-bottom: 15px;
+            letter-spacing: 2px;
         }
 
         .hero p {
             font-size: 20px;
             margin-bottom: 30px;
+            color: #eee;
         }
 
         .btn {
             display: inline-block;
             background: #ff5a00;
-            color: white;
-            padding: 14px 30px;
+            color: rgba(17, 31, 230, 0);
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
+            transition: background 0.3s, transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
         }
 
         .btn:hover {
-            background: #ff7b2f;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 7px 18px rgba(255, 90, 0, 0.4);
         }
 
-        /* About */
+        .btn:active {
+            transform: translateY(-1px) scale(0.97);
+        }
+
+        .btn:active::after {
+            animation: button-ripple 0.5s ease-out;
+        }
+
+        @keyframes button-ripple {
+            from {
+                opacity: 0.4;
+                transform: translate(-50%, -50%) scale(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+        }
+
+        .order-btn {
+            display: inline-block;
+            background: #ff5a00;
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .order-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 7px 18px rgba(255, 90, 0, 0.4);
+        }
+
+        .order-btn:active {
+            transform: translateY(-1px) scale(0.97);
+        }
+
+        .order-btn:active::after {
+            animation: button-ripple 0.5s ease-out;
+        }
+
+        .click-button {
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s, transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .click-button::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        .click-button:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 7px 18px rgba(255, 90, 0, 0.4);
+        }
+
+        .click-button:active {
+            transform: translateY(-1px) scale(0.97);
+        }
+
+        .click-button:active::after {
+            animation: button-ripple 0.5s ease-out;
+        }
+
+        /* Common Section Styling */
         .section {
-            padding: 70px 8%;
+            padding: 60px 8%;
             text-align: center;
         }
 
         .section h2 {
-            font-size: 38px;
-            margin-bottom: 20px;
+            font-size: 36px;
+            margin-bottom: 25px;
             color: #ff5a00;
         }
 
         .section p {
             max-width: 700px;
             margin: auto;
-            line-height: 1.7;
+            line-height: 1.8;
             color: #ccc;
-        /* Menu Cards */
+        }
 
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-top: 40px;
-}
+        /* Menu Grid & Cards */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
+        }
 
-.menu-card {
-    background: #1c1c1c;
-    border-radius: 15px;
-    overflow: hidden;
-    padding-bottom: 20px;
-    transition: 0.3s;
-}
+        .menu-card {
+            background: #1c1c1c;
+            border-radius: 15px;
+            overflow: hidden;
+            padding-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.menu-card:hover {
-    transform: translateY(-8px);
-}
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(255, 90, 0, 0.2);
+        }
 
-.menu-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-}
+        .menu-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
 
-.menu-card h3 {
-    margin: 15px 0 8px;
-    font-size: 22px;
-}
+        .menu-card h3 {
+            margin: 15px 0 8px;
+            font-size: 22px;
+            color: #fff;
+        }
 
-.menu-card .price {
-    color: #ff5a00;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
+        .menu-card .price {
+            color: #ff5a00;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-.order-btn {
-    display: inline-block;
-    background: #ff5a00;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-}
+        .order-btn {
+            display: inline-block;
+            background: #ff5a00;
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.22s ease, box-shadow 0.22s ease;
+        }
 
-@media (max-width: 900px) {
-    .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
+        .order-btn::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
+        }
 
-@media (max-width: 550px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-    }
-}
+        .order-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 7px 18px rgba(255, 90, 0, 0.4);
+        }
+
+        .order-btn:active {
+            transform: translateY(-1px) scale(0.97);
+        }
+
+        .order-btn:active::after {
+            animation: button-ripple 0.5s ease-out;
+        }
+
         /* Footer */
         footer {
             text-align: center;
             padding: 25px;
             background: #080808;
-            color: #aaa;
+            color: #777;
+            font-size: 14px;
         }
 
         @media (max-width: 600px) {
             .hero h1 {
-                font-size: 40px;
+                font-size: 38px;
             }
 
             nav {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
             }
 
             nav a {
-                margin: 8px;
+                margin: 0 10px;
             }
         }
+
+    
+    .order-btn:hover {
+        background: #ff7b2f;
+    }
+
+    .loading-screen {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: #111;
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .burger-loader {
+        font-size: 70px;
+        animation: burgerSpin 1s infinite;
+    }
+
+    .loading-text {
+        margin-top: 20px;
+        color: #ff5a00;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    @keyframes burgerSpin {
+        0% {
+            transform: scale(1) rotate(0deg);
+        }
+
+        50% {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        100% {
+            transform: scale(1) rotate(0deg);
+        }
+    }
     </style>
 </head>
 
 <body>
 
     <nav>
-        <div class="logo">CRISPY BITE 🍔</div>
-
+        <div class="logo">FRIENDS FAST FOOD 🍔</div>
         <div>
             <a href="#">Home</a>
+            <a href="#menu">Menu</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <section class="section" id="menu">
-
-    <h2>Our Menu 🍔</h2>
-
-    <div class="menu-grid">
-
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Burger">
-            <h3>Classic Burger</h3>
-            <div class="price">₹99</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002" alt="Pizza">
-            <h3>Cheese Pizza</h3>
-            <div class="price">₹149</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877" alt="Fries">
-            <h3>French Fries</h3>
-            <div class="price">₹59</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec" alt="Fried Chicken">
-            <h3>Fried Chicken</h3>
-            <div class="price">₹129</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-    </div>
-
-</section>
+    <section class="hero">
         <div>
-            <h1>CRISPY BITE</h1>
-
-            <p>
-                Fresh • Crispy • Delicious
-            </p>
-
-            <a href="#menu" class="btn">
-                Explore Menu
-            </a>
+            <h1>FRIENDS FAST </h1>
+            <p>Fresh • Crispy • Delicious</p>
+            <a href="#menu" class="btn">EXPLORE MENU</a>
+            <button type="button" id="myButton" class="click-button">Click Me</button>
         </div>
     </section>
-<section class="section" id="menu">
 
-    <h2>Our Menu 🍔</h2>
+    <!-- Menu Cards Section -->
+    <section class="section" id="menu">
+        <h2>Our Menu 🍔</h2>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Classic Burger">
+                <h3>Classic Burger</h3>
+                <div class="price">₹99</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
 
-    <div class="menu-grid">
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002" alt="Cheese Pizza">
+                <h3>Cheese Pizza</h3>
+                <div class="price">₹149</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
 
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Burger">
-            <h3>Classic Burger</h3>
-            <div class="price">₹99</div>
-            <a href="#contact" class="order-btn">Order Now</a>
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877" alt="French Fries">
+                <h3>French Fries</h3>
+                <div class="price">₹59</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
+
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec" alt="Fried Chicken">
+                <h3>Fried Chicken</h3>
+                <div class="price">₹129</div>
+                <button type="button" class="order-btn">Order Now</button>
+            </div>
         </div>
+    </section>
 
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002" alt="Pizza">
-            <h3>Cheese Pizza</h3>
-            <div class="price">₹149</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877" alt="Fries">
-            <h3>French Fries</h3>
-            <div class="price">₹59</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-        <div class="menu-card">
-            <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec" alt="Fried Chicken">
-            <h3>Fried Chicken</h3>
-            <div class="price">₹129</div>
-            <a href="#contact" class="order-btn">Order Now</a>
-        </div>
-
-    </div>
-
-</section>
-
-            📍 Aruppukottai, Tamil Nadu<br><br>
-            📞 98765 43210
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2>About Us</h2>
+        <p>
+            Welcome to Crispy Bite! We serve delicious, fresh, and crispy fast food made with quality ingredients. Perfect taste, affordable prices, and a happy food experience.
         </p>
     </section>
 
-    <footer>
-        © 2026 Crispy Bite. All Rights Reserved.
-    </footer>
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <p style="margin-bottom: 25px; color: #bbb;">
+        <div style="line-height: 2; color: #ccc; font-size: 16px;">
+            📍 <strong>Location:</strong> 37, Adithanar Rd, Pudupet, Egmore,Chennai, Tamil Nadu-600002<br>
+            📞 <strong>Phone:</strong> +91 8072514301<br>
+            ✉️ <strong>Email:</strong> hypersaravanan12@crispybite.com<br>
+            🕒 <strong>Timing:</strong> Open – Closed: 11:00 AM – 11:30 PM
+        </div>
+        <div style="margin-top: 30px;">
+            <a href="#" class="order-btn" style="margin: 5px;">Instagram</a>
+            <a href="https://wa.me/918072514301" class="order-btn" style="margin: 5px;" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a href="#" class="order-btn" style="margin: 5px;">Facebook</a>
+        </div>
+    </section>
 
+    <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+        <div class="burger-loader" aria-hidden="true">🍔</div>
+        <p class="loading-text" id="loadingText" role="status" aria-live="polite">
+            Preparing your menu...
+        </p>
+        <div class="loading-progress" aria-hidden="true">
+            <div class="loading-progress-bar" id="loadingProgress"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("myButton").addEventListener("click", function() {
+            alert("Button clicked!");
+        });
+
+        const cartStorageKey = "friendsFastFoodCart";
+
+        document.querySelectorAll(".menu-card .order-btn").forEach(function(button) {
+            button.addEventListener("click", function() {
+                const menuCard = button.closest(".menu-card");
+                const itemName = menuCard.querySelector("h3").textContent.trim();
+                const itemPrice = Number(menuCard.querySelector(".price").textContent.replace(/[^\d.]/g, ""));
+                const cart = JSON.parse(localStorage.getItem(cartStorageKey) || "[]");
+                const existingItem = cart.find(function(item) {
+                    return item.name === itemName;
+                });
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+                }
+
+                localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+                window.location.href = "order.html";
+            });
+        });
+
+        const exploreButton = document.querySelector(".hero .btn");
+        const loadingScreen = document.getElementById("loadingScreen");
+        const loadingText = document.getElementById("loadingText");
+        const progressBar = document.getElementById("loadingProgress");
+        const menu = document.getElementById("menu");
+
+        const loadingMessages = [
+            "Preparing your menu...",
+            "Heating the kitchen...",
+            "Adding fresh ingredients...",
+            "Menu is ready! 🍔"
+        ];
+
+        exploreButton.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            if (loadingScreen.classList.contains("active")) {
+                return;
+            }
+
+            loadingScreen.classList.add("active");
+            loadingScreen.setAttribute("aria-hidden", "false");
+
+            progressBar.style.width = "0%";
+            void progressBar.offsetWidth;
+            progressBar.style.width = "100%";
+
+            let messageIndex = 0;
+            loadingText.textContent = loadingMessages[messageIndex];
+
+            const messageTimer = setInterval(function() {
+                messageIndex++;
+                loadingText.textContent = loadingMessages[messageIndex];
+
+                if (messageIndex === loadingMessages.length - 1) {
+                    clearInterval(messageTimer);
+                }
+            }, 750);
+
+            setTimeout(function() {
+                clearInterval(messageTimer);
+                loadingScreen.classList.remove("active");
+                loadingScreen.setAttribute("aria-hidden", "true");
+                menu.scrollIntoView({ behavior: "smooth" });
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
